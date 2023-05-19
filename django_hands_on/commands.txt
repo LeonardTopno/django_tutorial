@@ -1,0 +1,81 @@
+Important File
+
+manage.py (created atomatically when we create a project)
+models.py - we create this to create models [touch hands_on/models.py]
+settings.py (created automatically)
+admin.py (we have to create this, if not automatically created)
+
+
+For APIs
+serializer.py [Python Objects to JSON] - when we try to return our model through API, we will need to serialize them. Hence we will use this
+views.py
+urls.py
+
+
+
+
+
+******** COMMANDS ********
+
+~ pip3 install django
+~ pip3 install djangorestframework
+
+pip3 list : lists all the installed modules along with their versions
+
+
+After django is installed, you should be able to say
+~ django-admin
+
+TO start a project(hands_on)
+~ django-admin startproject hands_on
+
+## When we create a project, a file is created - manange.py
+This is a wrapper around django-admin
+
+
+## To start a development server
+~ python3 manage.py runserver
+
+## To Quit Server
+Control + C
+
+## To apply all the migrations (first time) [migrations represent data structure for databases]
+~ python3 manage.py migrate
+
+## django has an admin page which allows us to see the different tables and see the data in each table
+http://127.0.0.1:8000/admin/login
+
+
+## To create superuser
+~ python3 manage.py createsuperuser
+
+
+
+
+## To create a table (model which is actually a python class)
+    - First create a file: models.py (under app hands_on)
+        ~ touch hands_on/models.py
+
+## To create database table from this information, we need to create another migration
+    ~ python3 manage.py makemigrations hands_on
+    # python3 manage.py makemigrations <name_of_the_app>
+         
+## Register your model (a python class, here Drink) at admin.py 
+    ~ touch hands_on/admin.py
+
+    admin.py file content
+        from django.contrib import admin
+        from .models import Drink
+
+        admin.site,register(Drink) 
+
+## After we register our model "Drink" in the file "admin.py", we may need to kill the current running server(Ctrl-C), then do the follwoing.
+    python3 manage.py makemigrations hands_on
+    python3 manage.py migrate
+
+
+### A kind of summary
+    i. We have a model "Drink" in models.py
+    ii. We registered that model (Drink) in `admin.py`, after creating `admin.py` file
+    iii. We have a serializer (serializer.py). This is used to serialize dict/non-dict objects
+    iv. We now need to create "views.py"
